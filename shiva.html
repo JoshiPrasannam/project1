@@ -1,0 +1,138 @@
+<?php
+include("connection.php");
+error_reporting(0);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Check-Out Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .form-group input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .rate-info {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .price-info {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    function calculatePrice() {
+      var checkinDate = new Date(document.getElementById('checkin-date').value);
+      var checkoutDate = new Date(document.getElementById('checkout-date').value);
+      var ratePerNight = 100; // Replace with your actual rate per night
+
+      // Calculate the number of days between check-in and check-out
+      var timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+      var numDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+      // Calculate the total price
+      var totalPrice = numDays * ratePerNight;
+
+      // Update the rate and price information in the form
+      document.getElementById('rate-info').innerText = 'Rate per night: $' + ratePerNight;
+      document.getElementById('price-info').innerText = 'Total price: $' + totalPrice;
+    }
+  </script>
+</head>
+<body>
+  <h1>Hotel Check-Out Form</h1>
+  <div class="form-container">
+    <form>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="room-number">Room Number:</label>
+        <input type="text" id="room-number" name="room-number" required>
+      </div>
+      <div class="form-group">
+        <label for="checkin-date">Check-In Date:</label>
+        <input type="date" id="checkin-date" name="checkin-date" required>
+      </div>
+      <div class="form-group">
+        <label for="checkout-date">Check-Out Date:</label>
+        <input type="date" id="checkout-date" name="checkout-date" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Submit" onclick="calculatePrice(); return false;">
+      </div>
+      <div class="rate-info" id="rate-info"></div>
+      <div class="price-info" id="price-info"></div>
+    <button> <a href="vinu.html" >Thankyou</button></a>
+    </form>
+  </div>
+</body>
+</html>
+<?php
+$rn=$_Get['name'];
+$re=$_Get['email'];
+$rp=$_Get['phone'];
+$rr=$_Get['room-number']
+$rci=$_Get['checkin-date'];
+$rco=$_Get['checkout-date'];
+   
+
+$query="INSERT INTO college values('$rn',$re,$rp,$rr,$rci,$rco)";
+
+$data=mysqli_query($conn,$query);
+
+if($data)
+{
+  echo "data inserted";
+}
+?>
